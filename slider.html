@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slider</title>
+</head>
+<style>
+    * {
+        list-style: none;
+        margin: 0;
+        padding: 0;  
+    }
+
+    a{
+        color:#fff;
+        text-decoration: none;
+    }
+
+    .kind_wrap {
+        border: 1px solid red;
+        position: relative;
+        margin: 0 auto;
+        max-width: 800px;
+        width: 100%;
+    }
+
+    /* slider div */
+    .kind_wrap .kind_slider {
+        width:800px;
+        overflow: hidden;
+    }
+
+    /* ul */
+    .kind_wrap .slider {
+        display: flex;
+        width: 2400px;
+        border: 1px solid blue;
+    }
+
+    /* button */
+    .arrow a {
+        position: absolute;
+        top:50%;
+        transform:translateY(-50%);
+    }
+
+    .arrow .prev {
+        left: 50px;
+    }
+
+    .arrow .next {
+        right: 50px;
+    }
+</style>
+
+<body>
+    <div class="kind_wrap">
+        <div class="kind_slider">
+            <ul class="slider">
+                <li><img src="http://placekitten.com/800/300" /></li>
+                <li><img src="http://placekitten.com/800/301" /></li>
+                <li><img src="http://placekitten.com/800/299" /></li>
+            </ul>
+        </div>
+        <div class="arrow">
+            <a href="" class="prev">이전</a>
+            <a href="" class="next">다음</a>
+        </div>
+    </div>
+
+    <script>
+
+    </script>
+</body>
+
+</html>
