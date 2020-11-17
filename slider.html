@@ -95,17 +95,16 @@
         // cloneNode
         const firstLi = lis[0].cloneNode(true);
         const lastLi = lis[lis.length-1].cloneNode(true);
+   
+        ulElem.insertBefore(lastLi, lis[0]) // 부모.insertBefore(넣을 것, 넣을 곳(~앞))
+        ulElem.appendChild(firstLi)
 
         // 클론 포함해서 넓이 주기
         const slideCloneLis = ulElem.querySelectorAll('li') // 다시 li를 가져오기
         console.log(slideCloneLis)
         const lisWidth = lis[0].clientWidth
         ulElem.style.width = lis.length * lisWidth + 'px'
-
-
-        ulElem.insertBefore(lastLi, lis[0]) // 부모.insertBefore(넣을 것, 넣을 곳(~앞))
-        ulElem.appendChild(firstLi)
-        
+    
         function moveSlide(e) {
 
             e.preventDefault()
@@ -118,15 +117,9 @@
                 }
             } else { // prev 버튼
                 if (currentNum === 0) { // 0일때 클릭하면
-                    // currentNum = lis.length - 1 // currentNum이 2가 됨
-                    // moveDist = -(lisWidth * currentNum) // -(800*2) = -1600px
-                    // ulElem.style.left = moveDist + 'px'
                     return;
                 } else {
                     moveSliderLeft(1) // 양수로 받아서
-                    // currentNum --
-                    // moveDist += lisWidth               
-                    // ulElem.style.left = moveDist + 'px'
                 }
             }
 
