@@ -41,6 +41,7 @@
         position: absolute;
         left: 0;
         transition: all .3s linear;
+        transition-duration: 100ms;
     }
 
     /* button */
@@ -57,6 +58,7 @@
     .arrow .next {
         right: 50px;
     }
+
 </style>
 
 <body>
@@ -77,46 +79,61 @@
     <script>
         // ul의 넓이가 li 만큼의 넓이 가지기
         const ulElem = document.querySelector('.slider');
-        const lis = document.querySelectorAll('.slider li');
-        const lisWidth = lis[0].clientWidth
-
-        // console.log(lis.length)
-
-        ulElem.style.width = lis.length * lisWidth + 'px'
+        const lis = document.querySelectorAll('.slider li');    
 
         // 버튼 클릭 이벤트 만들기
-
         const moveButton = document.querySelector('.arrow')
         moveButton.addEventListener('click', moveSlide)
 
         // 버튼클릭할때마다 800씩 조정
         let moveDist = 0;
         let currentNum = 0;
+        // 애니메이션 속도 조절
+        let speedTime = 500
+        ulElem.style.transitionDuration = speedTime + 'ms'
 
+        // cloneNode
+        const firstLi = lis[0].cloneNode(true);
+        const lastLi = lis[lis.length-1].cloneNode(true);
+
+        // 클론 포함해서 넓이 주기
+        const slideCloneLis = ulElem.querySelectorAll('li') // 다시 li를 가져오기
+        console.log(slideCloneLis)
+        const lisWidth = lis[0].clientWidth
+        ulElem.style.width = lis.length * lisWidth + 'px'
+
+
+        ulElem.insertBefore(lastLi, lis[0]) // 부모.insertBefore(넣을 것, 넣을 곳(~앞))
+        ulElem.appendChild(firstLi)
+        
         function moveSlide(e) {
 
             e.preventDefault()
 
             if (e.target.className === 'next') { // next 버튼
-                if (currentNum === lis.length - 1) { // 마지막 li에서 첫번째 li로 돌아가기
-                    moveDist = 0;
-                    currentNum = 0;
-                    ulElem.style.left = moveDist + 'px'
+                if (currentNum === lis.length - 1) {
+                    return;
                 } else { // 마지막이 아닐 경우
-                    moveDist += -lisWidth
-                    currentNum += 1
-                    ulElem.style.left = moveDist + 'px'
+                    moveSliderLeft(-1)
                 }
             } else { // prev 버튼
                 if (currentNum === 0) { // 0일때 클릭하면
-                    currentNum = lis.length - 1 // currentNum이 2가 됨
-                    moveDist = -(lisWidth * currentNum) // -(800*2) = -1600px
-                    ulElem.style.left = moveDist + 'px'
+                    // currentNum = lis.length - 1 // currentNum이 2가 됨
+                    // moveDist = -(lisWidth * currentNum) // -(800*2) = -1600px
+                    // ulElem.style.left = moveDist + 'px'
+                    return;
                 } else {
-                    moveDist += lisWidth
-                    currentNum += -1
-                    ulElem.style.left = moveDist + 'px'
+                    moveSliderLeft(1) // 양수로 받아서
+                    // currentNum --
+                    // moveDist += lisWidth               
+                    // ulElem.style.left = moveDist + 'px'
                 }
+            }
+
+            function moveSliderLeft(direction) {
+                currentNum += (-1 * direction) // 음수로 해서 보내기
+                moveDist += lisWidth * direction
+                ulElem.style.left = moveDist + 'px'
             }
         }
     </script>
