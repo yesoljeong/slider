@@ -103,25 +103,19 @@
                     currentNum = 0;
                     ulElem.style.left = moveDist + 'px'
                 } else { // 마지막이 아닐 경우
-                    moveDist += -800
+                    moveDist += -lisWidth
                     currentNum += 1
-                    // console.log(currentNum)
                     ulElem.style.left = moveDist + 'px'
-                    // console.log(ulElem.style.left)
                 }
             } else { // prev 버튼
                 if (currentNum === 0) { // 0일때 클릭하면
-                    moveDist = 800
-                    currentNum = -lis.length + 1 // currentNum이 2가 됨
-                    console.log(currentNum)
-                    ulElem.style.left = moveDist * currentNum + 'px' // 800 * -2 = -1600px
-                    console.log(ulElem.style.left)
-                } else {
-                    moveDist += 800
-                    currentNum += -1
-                    console.log(currentNum)
+                    currentNum = lis.length - 1 // currentNum이 2가 됨
+                    moveDist = -(lisWidth * currentNum) // -(800*2) = -1600px
                     ulElem.style.left = moveDist + 'px'
-                    console.log(ulElem.style.left)
+                } else {
+                    moveDist += lisWidth
+                    currentNum += -1
+                    ulElem.style.left = moveDist + 'px'
                 }
             }
         }
